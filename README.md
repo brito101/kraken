@@ -2,6 +2,8 @@
 
 ## Web Crawler System with Laravel 10 + Docker + Telescope + Debugar + AdminLTE3 + DataTables server side + Spatie ACL
 
+![plot](./screenshots/kraken.webp)
+
 ### Resources
 
 - Users module

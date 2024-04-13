@@ -1,14 +1,15 @@
 @extends('adminlte::master')
 
-@php( $dashboard_url = View::getSection('dashboard_url') ?? config('adminlte.dashboard_url', 'home') )
+@php($dashboard_url = View::getSection('dashboard_url') ?? config('adminlte.dashboard_url', 'home'))
 
 @if (config('adminlte.use_route_url', false))
-    @php( $dashboard_url = $dashboard_url ? route($dashboard_url) : '' )
+    @php($dashboard_url = $dashboard_url ? route($dashboard_url) : '')
 @else
-    @php( $dashboard_url = $dashboard_url ? url($dashboard_url) : '' )
+    @php($dashboard_url = $dashboard_url ? url($dashboard_url) : '')
 @endif
 
 @section('adminlte_css')
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     @stack('css')
     @yield('css')
 @stop
@@ -16,13 +17,14 @@
 @section('classes_body'){{ ($auth_type ?? 'login') . '-page' }}@stop
 
 @section('body')
+    <canvas class="snow"></canvas>
     <div class="{{ $auth_type ?? 'login' }}-box">
 
         {{-- Logo --}}
         <div class="{{ $auth_type ?? 'login' }}-logo">
-            <a href="{{ $dashboard_url }}">
-                <img src="{{ asset(config('adminlte.logo_img')) }}" height="50">
-                {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
+            <a href="{{ $dashboard_url }}" class="d-flex flex-wrap justify-content-center align-items-center">
+                <img src="{{ asset(config('adminlte.logo_img')) }}" height="75">
+                <h1 class="text-success h1 ml-2">{{ config('app.name') }}</h1>
             </a>
         </div>
 
@@ -58,4 +60,5 @@
 @section('adminlte_js')
     @stack('js')
     @yield('js')
+    <script src="{{ asset('js/snow.js') }}"></script>
 @stop

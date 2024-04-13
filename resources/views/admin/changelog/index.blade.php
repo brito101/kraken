@@ -39,11 +39,12 @@
                             <div class="col-12">
                                 <h4>Versionamento:</h4>
 
-                                <x-adminlte-callout theme="info" class="elevation-2" title-class="text-uppercase"
+                                <x-adminlte-callout theme="success" class="elevation-2" title-class="text-uppercase"
                                     title="1.0.0">
                                     <ul>
                                         <li>Módulo de ACL com perfis e permissões</li>
                                         <li>Módulo de Usuários</li>
+                                        <li>Módulo de Sites</li>
                                         <li>Changelog</li>
                                     </ul>
                                 </x-adminlte-callout>
@@ -53,23 +54,20 @@
                     </div>
                     <div class="col-12 col-md-12 col-lg-6 order-1 order-md-2 overflow-auto" style="max-height: 65vh;">
 
-                        <x-adminlte-profile-widget name="{{ env('APP_NAME')}}" desc="{{ env('APP_DES')}}"
-                            theme="bg-gradient-dark" img="{{ asset('img/favicon.svg') }}" layout-type="classic">
+                        <x-adminlte-profile-widget name="{{ env('APP_NAME') }}" desc="{{ env('APP_DES') }}"
+                            theme="bg-gradient-dark" img="{{ asset('img/favicon.png') }}" layout-type="classic">
                             <x-adminlte-profile-row-item
                                 title="Rodrigo Carvalho de Brito, e-mail: contato@rodrigobrito.dev.br"
                                 class="text-left border-bottom border-secondary" />
-                            <x-adminlte-profile-col-item title="Javascript" icon="fab fa-2x fa-js text-primary" size=4 />
-                            <x-adminlte-profile-col-item title="PHP" icon="fab fa-2x fa-php text-primary" ssize=4 />
-                            <x-adminlte-profile-col-item title="HTML5" icon="fab fa-2x fa-html5 text-primary" size=4 />
-                            <x-adminlte-profile-col-item title="CSS3" icon="fab fa-2x fa-css3 text-primary" size=4 />
-                            <x-adminlte-profile-col-item title="Bootstrap" icon="fab fa-2x fa-bootstrap text-primary"
+                            <x-adminlte-profile-col-item title="PHP" icon="fab fa-2x fa-php text-success" ssize=4 />
+                            <x-adminlte-profile-col-item title="Laravel" icon="fab fa-2x fa-laravel text-success" size=4 />
+                            <x-adminlte-profile-col-item title="HTML5" icon="fab fa-2x fa-html5 text-success" size=4 />
+                            <x-adminlte-profile-col-item title="CSS3" icon="fab fa-2x fa-css3 text-success" size=4 />
+                            <x-adminlte-profile-col-item title="Javascript" icon="fab fa-2x fa-js text-success" size=4 />
+                            <x-adminlte-profile-col-item title="Bootstrap" icon="fab fa-2x fa-bootstrap text-success"
                                 size=4 />
-                            <x-adminlte-profile-col-item title="Laravel" icon="fab fa-2x fa-laravel text-primary" size=4 />
-                        </x-adminlte-profile-widget>
 
-                        <p class="text-muted">
-                            Sistema base em Laravel 10
-                        </p>
+                        </x-adminlte-profile-widget>
                     </div>
                 </div>
             </div>

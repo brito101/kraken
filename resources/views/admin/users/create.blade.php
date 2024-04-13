@@ -42,7 +42,7 @@
                             <div class="card-body">
 
                                 <div class="d-flex flex-wrap justify-content-between">
-                                    <div class="col-12 col-md-6 form-group px-0 pr-md-2">
+                                    <div class="col-12 form-group px-0">
                                         <label for="name">Nome</label>
                                         <input type="text" class="form-control" id="name"
                                             placeholder="Nome Completo" name="name" value="{{ old('name') }}" required>

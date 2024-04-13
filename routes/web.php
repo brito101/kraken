@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\{
     ACL\PermissionController,
     ACL\RoleController,
     ChangelogController,
+    SiteController,
 };
 
 use Illuminate\Support\Facades\Auth;
@@ -28,9 +29,12 @@ Route::group(['middleware' => ['auth']], function () {
         /** Chart home */
         Route::get('/chart', [AdminController::class, 'chart'])->name('home.chart');
 
+        /** Sites */
+        Route::resource('sites', SiteController::class);
+
         /** Users */
         Route::get('/user/edit', [UserController::class, 'edit'])->name('user.edit');
-        Route::resource('users', UserController::class);
+        Route::resource('users', UserController::class)->except(['show']);
 
         /**
          * ACL

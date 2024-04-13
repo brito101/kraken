@@ -244,6 +244,26 @@ return [
             'icon'        => 'fa fa-fw fa-digital-tachograph mr-2',
         ],
         [
+            'text'      => 'Sites',
+            'url'       => '#',
+            'icon'      => 'fas fa-fw fa-globe mr-2',
+            'can'         => 'Acessar Sites',
+            'submenu' => [
+                [
+                    'text' => 'Listagem de Sites',
+                    'url'  => 'admin/sites',
+                    'icon' => 'fas fa-fw fa-chevron-right',
+                    'can'  => 'Listar Sites',
+                ],
+                [
+                    'text' => 'Cadastro de Site',
+                    'url'  => 'admin/sites/create',
+                    'icon' => 'fas fa-fw fa-chevron-right',
+                    'can'  => 'Criar Sites',
+                ],
+            ],
+        ],
+        [
             'text'        => 'Usuários',
             'url'         => '#',
             'icon'        => 'fas fa-fw fa-users mr-2',
@@ -299,12 +319,7 @@ return [
             'url'    => 'admin/changelog',
             'icon'    => 'fas fa-fw fa-code mr-2',
         ],
-        [
-            'text'        => 'Site',
-            'url'    => '/',
-            'icon'    => 'fas fa-fw fa-link mr-2',
-            'target' => '_blank',
-        ]
+
     ],
 
     /*

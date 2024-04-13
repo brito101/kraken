@@ -1,6 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
+    "/css/login.css": "/css/login.css",
     "/img/403-error.webp": "/img/403-error.webp",
     "/img/404-error.webp": "/img/404-error.webp",
     "/img/favicon.png": "/img/favicon.png",
@@ -8,5 +9,6 @@
     "/img/kraken.webp": "/img/kraken.webp",
     "/js/company.js": "/js/company.js",
     "/js/address.js": "/js/address.js",
-    "/js/phone.js": "/js/phone.js"
+    "/js/phone.js": "/js/phone.js",
+    "/js/snow.js": "/js/snow.js"
 }

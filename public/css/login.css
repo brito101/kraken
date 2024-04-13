@@ -1,0 +1,14 @@
+body {
+  background-color: #1a1919 !important;
+}
+
+.snow {
+  top: 0;
+  left: 0;
+  position: absolute;
+  max-width: 100%;
+  max-height: 100%;
+  overflow-x: hidden;
+  z-index: -2;
+  transform: rotate(180deg);
+}
