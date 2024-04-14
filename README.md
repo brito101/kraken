@@ -2,7 +2,7 @@
 
 ## Web Crawler System with Laravel 10 + Docker + Telescope + Debugar + AdminLTE3 + DataTables server side + Spatie ACL
 
-<img src="./screenshots/kraken.webp" alt="Kraken" style="display: block; margin: auto; text-align: center;">
+<img src="./screenshots/kraken.webp" alt="Kraken" style="margin: 0 auto;">
 
 ### Resources
 
