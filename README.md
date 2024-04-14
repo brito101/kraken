@@ -2,11 +2,13 @@
 
 ## Web Crawler System with Laravel 10 + Docker + Telescope + Debugar + AdminLTE3 + DataTables server side + Spatie ACL
 
-![plot](./screenshots/kraken.webp){ margin: 0 auto"}
+<p style="text-center">
+![plot](./screenshots/kraken.webp)
+</p>
 
 ### Resources
 
-- Users module
+-   Users module
 
 ### Usage
 
