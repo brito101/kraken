@@ -8,7 +8,9 @@
 
 ### Resources
 
+-   ACL module
 -   Users module
+-   Sites module
 
 ### Usage
 
