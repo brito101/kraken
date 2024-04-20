@@ -1,6 +1,6 @@
 # Kraken
 
-## Web Crawler System with Laravel 10 + Docker + Telescope + Debugar + AdminLTE3 + DataTables server side + Spatie ACL
+## Web Crawler System with Laravel 11 + Docker + Telescope + Debugar + AdminLTE3 + DataTables server side + Spatie ACL
 
 <div align="center">
     <img src="./screenshots/kraken.webp">

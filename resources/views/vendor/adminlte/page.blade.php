@@ -5,6 +5,15 @@
 @section('adminlte_css')
     @stack('css')
     @yield('css')
+    <style>
+        * {
+            text-decoration: none !important;
+        }
+
+        div.dt-button-collection {
+            background-color: #454d55;
+        }
+    </style>
 @stop
 
 @section('classes_body', $layoutHelper->makeBodyClasses())
@@ -45,8 +54,8 @@
 
     </div>
     <footer class="main-footer fixed-bottom">
-        <strong>Copyright © 2022-{{ date('Y') }} <a href="https://www.rodrigobrito.dev.br" target="_blank"
-                rel="noreferrer" title="Rodrigo Brito Desenvolvedor Web">rodrigobrito.dev.br</a>.</strong>
+        <strong>Copyright © 2022-{{ date('Y') }} <a href="https://www.rodrigobrito.dev.br" target="_blank" rel="noreferrer"
+                title="Rodrigo Brito Desenvolvedor Web">rodrigobrito.dev.br</a>.</strong>
         Todos os direitos Reservados.
         <div class="float-right d-none d-sm-inline-block">
             <b>Versão</b> 1.0.0

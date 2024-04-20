@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Helpers\CheckPermission;
 use App\Helpers\TextProcessor;
 use App\Http\Controllers\Controller;
+use App\Http\Crawler\Crawler;
 use App\Http\Requests\Admin\SiteRequest;
 use App\Models\Site;
 use App\Models\Views\Site as ViewsSite;
@@ -15,9 +16,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
-use Spatie\Permission\Models\Role;
 use DataTables;
 use Illuminate\Http\Response;
 
@@ -44,7 +43,10 @@ class SiteController extends Controller
                     return Str::limit($row->description);
                 })
                 ->addColumn('action', function ($row) use ($token) {
-                    return '<a class="btn btn-xs btn-primary mx-1 shadow" title="Editar" href="sites/' . $row->id . '/edit"><i class="fa fa-lg fa-fw fa-pen"></i></a>'
+                    return
+                        '<a class="btn btn-xs btn-warning mx-1 shadow" title="Crawlet" href="sites/' . $row->id . '/crawler"><i class="fa fa-lg fa-fw fa-spider"></i></a>'
+                        . '<a class="btn btn-xs btn-success mx-1 shadow" title="Visualizar" href="sites/' . $row->id . '"><i class="fa fa-lg fa-fw fa-eye"></i></a>'
+                        . '<a class="btn btn-xs btn-primary mx-1 shadow" title="Editar" href="sites/' . $row->id . '/edit"><i class="fa fa-lg fa-fw fa-pen"></i></a>'
                         . '<form method="POST" action="sites/' . $row->id . '" class="btn btn-xs px-0"><input type="hidden" name="_method" value="DELETE"><input type="hidden" name="_token" value="' . $token . '"><button class="btn btn-xs btn-danger mx-1 shadow" title="Excluir" onclick="return confirm(\'Confirma a exclusão deste site?\')"><i class="fa fa-lg fa-fw fa-trash"></i></button></form>';
                 })
                 ->rawColumns(['description', 'action'])
@@ -103,7 +105,15 @@ class SiteController extends Controller
      */
     public function show(string $id)
     {
-        //
+        CheckPermission::checkAuth('Listar Sites');
+
+        $site = Site::find($id);
+
+        if (!$site) {
+            abort(403, 'Acesso não autorizado');
+        }
+
+        return view('admin.sites.show', compact('site'));
     }
 
     /**
@@ -187,5 +197,34 @@ class SiteController extends Controller
                 ->back()
                 ->with('error', 'Erro ao excluir!');
         }
+    }
+
+    public function crawler(int $id)
+    {
+        $site = Site::find($id);
+
+        if (!$site) {
+            abort(403, 'Acesso não autorizado');
+        }
+
+        $crawler = Crawler::crawler($site->url);
+
+        $html = '<div>';
+
+        if (count($crawler['headers']) > 0) {
+            foreach ($crawler['headers'] as $k => $v) {
+                $html .= '<p>' . $k . ': ' . implode(', ', $v) . '</p>';
+            }
+        }
+        $html .= '</div>';
+
+        $site->technologies = $html;
+        $site->last_check = date('Y-m-d H:i:s');
+        $site->status = 'Processando';
+        $site->update();
+
+        return redirect()
+            ->route('admin.sites.index')
+            ->with('success', 'Crawler em andamento!');
     }
 }

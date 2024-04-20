@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/chart', [AdminController::class, 'chart'])->name('home.chart');
 
         /** Sites */
+        Route::get('sites/{id}/crawler', [SiteController::class, 'crawler'])->name('site.crawler');
         Route::resource('sites', SiteController::class);
 
         /** Users */

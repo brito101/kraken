@@ -46,7 +46,7 @@
                                 'Descrição',
                                 'Checagem',
                                 'Status',
-                                ['label' => 'Ações', 'no-export' => true, 'width' => 10],
+                                ['label' => 'Ações', 'no-export' => true, 'width' => 15],
                             ];
                             $config = [
                                 'ajax' => url('/admin/sites'),

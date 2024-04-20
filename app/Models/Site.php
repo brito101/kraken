@@ -25,5 +25,6 @@ class Site extends Model
         'observations',
         'status',
         'user_id',
+        'last_check',
     ];
 }
