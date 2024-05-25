@@ -39,4 +39,14 @@ class Site extends Model
     {
         return $this->hasMany(Link::class);
     }
+
+    /** Cascade actions */
+    public static function boot(): void
+    {
+        parent::boot();
+
+        static::deleting(function ($site) {
+            $site->links()->delete();
+        });
+    }
 }

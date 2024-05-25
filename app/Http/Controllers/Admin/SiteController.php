@@ -81,7 +81,7 @@ class SiteController extends Controller
 
         $data = $request->all();
 
-        if ($request->description) {
+        if ($request->observations) {
             $data['observations'] = TextProcessor::store($request->url, 'sites', $request->observations);
         }
 
@@ -155,7 +155,7 @@ class SiteController extends Controller
 
         $data = $request->all();
 
-        if ($request->description) {
+        if ($request->observations) {
             $data['observations'] = TextProcessor::store($request->url, 'sites', $request->observations);
         }
 
