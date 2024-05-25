@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Site extends Model
+class Link extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -18,25 +18,18 @@ class Site extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'page',
         'url',
-        'ip',
-        'description',
-        'technologies',
-        'observations',
+        'title',
         'status',
-        'user_id',
+        'site_id',
         'last_check',
     ];
 
     /**Rlationships */
 
-    public function user()
+    public function site()
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function links()
-    {
-        return $this->hasMany(Link::class);
+        return $this->belongsTo(Site::class);
     }
 }

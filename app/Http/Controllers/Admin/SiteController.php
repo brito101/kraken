@@ -7,6 +7,7 @@ use App\Helpers\TextProcessor;
 use App\Http\Controllers\Controller;
 use App\Http\Crawler\Crawler;
 use App\Http\Requests\Admin\SiteRequest;
+use App\Jobs\CrawlerJob;
 use App\Models\Site;
 use App\Models\Views\Site as ViewsSite;
 use Illuminate\Contracts\Foundation\Application;
@@ -207,21 +208,11 @@ class SiteController extends Controller
             abort(403, 'Acesso não autorizado');
         }
 
-        $crawler = Crawler::crawler($site->url);
-
-        $html = '<div>';
-
-        if (count($crawler['headers']) > 0) {
-            foreach ($crawler['headers'] as $k => $v) {
-                $html .= '<p>' . $k . ': ' . implode(', ', $v) . '</p>';
-            }
-        }
-        $html .= '</div>';
-
-        $site->technologies = $html;
-        $site->last_check = date('Y-m-d H:i:s');
         $site->status = 'Processando';
+
         $site->update();
+
+        CrawlerJob::dispatch($site);
 
         return redirect()
             ->route('admin.sites.index')
