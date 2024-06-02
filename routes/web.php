@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\{
     ACL\PermissionController,
     ACL\RoleController,
     ChangelogController,
+    LinksController,
     SiteController,
 };
 
@@ -32,6 +33,9 @@ Route::group(['middleware' => ['auth']], function () {
         /** Sites */
         Route::get('sites/{id}/crawler', [SiteController::class, 'crawler'])->name('site.crawler');
         Route::resource('sites', SiteController::class);
+
+        /** Links */
+        Route::get('/links/{site}', [LinksController::class, 'index'])->name('links.index');
 
         /** Users */
         Route::get('/user/edit', [UserController::class, 'edit'])->name('user.edit');

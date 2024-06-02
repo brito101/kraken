@@ -14,6 +14,10 @@ class Site extends Model
     /** Access */
     public function getLastCheckAttribute($value)
     {
-        return date('d/m/Y H:i', strtotime($value));
+        if ($value) {
+            return date('d/m/Y H:i', strtotime($value));
+        } else {
+            return null;
+        }
     }
 }

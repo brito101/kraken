@@ -11,14 +11,14 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class CrawlerJob implements ShouldQueue
+class LinkJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
      * Create a new job instance.
      */
-    public function __construct(private Site $site)
+    public function __construct(private Link $link, private Site $site)
     {
         //
     }
@@ -28,21 +28,11 @@ class CrawlerJob implements ShouldQueue
      */
     public function handle(): void
     {
-        $crawler = Crawler::crawler($this->site->url);
-
-        $html = '<div>';
-
-        if (count($crawler['headers']) > 0) {
-            foreach ($crawler['headers'] as $k => $v) {
-                $html .= '<p>' . $k . ': ' . implode(', ', $v) . '</p>';
-            }
-        }
-        $html .= '</div>';
-
-        $this->site->technologies = $html;
         $this->site->last_check = date('Y-m-d H:i:s');
-
+        $this->site->status = 'Crawler em andamento';
         $this->site->update();
+
+        $crawler = Crawler::crawler($this->link->url);
 
         if (count($crawler['links']) > 0) {
 
@@ -74,6 +64,10 @@ class CrawlerJob implements ShouldQueue
                 }
             }
         }
+
+        $this->link->last_check = date('Y-m-d H:i:s');
+        $this->link->status = 'Finalizado';
+        $this->link->update();
 
         $this->site->last_check = date('Y-m-d H:i:s');
         $this->site->status = 'Finalizado';

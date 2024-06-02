@@ -26,7 +26,16 @@ class Link extends Model
         'last_check',
     ];
 
-    /**Rlationships */
+    public function getLastCheckAttribute($value)
+    {
+        if ($value) {
+            return date('d/m/Y H:i', strtotime($value));
+        } else {
+            return null;
+        }
+    }
+
+    /**Relationships */
 
     public function site()
     {

@@ -27,12 +27,12 @@ class Crawler
                     'User-Agent' => self::$userAgent,
                 ],
                 'allow_redirects' => true,
-                'timeout' => 5
+                'timeout' => 5,
             ]
         );
 
         try {
-            $response = $httpClient->get($url);
+            $response = $httpClient->get($url, ['verify' => false]);
 
             $headers =  $response->getHeaders();
 

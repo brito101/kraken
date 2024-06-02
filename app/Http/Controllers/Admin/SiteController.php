@@ -32,7 +32,7 @@ class SiteController extends Controller
     public function index(Request $request): View|Factory|Application|JsonResponse
     {
         CheckPermission::checkAuth('Listar Sites');
-
+    
         if ($request->ajax()) {
             $sites = ViewsSite::get();
 
@@ -45,7 +45,7 @@ class SiteController extends Controller
                 })
                 ->addColumn('action', function ($row) use ($token) {
                     return
-                        '<a class="btn btn-xs btn-warning mx-1 shadow" title="Crawlet" href="sites/' . $row->id . '/crawler"><i class="fa fa-lg fa-fw fa-spider"></i></a>'
+                        '<a class="btn btn-xs btn-warning mx-1 shadow" title="Crawler" href="sites/' . $row->id . '/crawler"><i class="fa fa-lg fa-fw fa-spider"></i></a>'
                         . '<a class="btn btn-xs btn-success mx-1 shadow" title="Visualizar" href="sites/' . $row->id . '"><i class="fa fa-lg fa-fw fa-eye"></i></a>'
                         . '<a class="btn btn-xs btn-primary mx-1 shadow" title="Editar" href="sites/' . $row->id . '/edit"><i class="fa fa-lg fa-fw fa-pen"></i></a>'
                         . '<form method="POST" action="sites/' . $row->id . '" class="btn btn-xs px-0"><input type="hidden" name="_method" value="DELETE"><input type="hidden" name="_token" value="' . $token . '"><button class="btn btn-xs btn-danger mx-1 shadow" title="Excluir" onclick="return confirm(\'Confirma a exclusão deste site?\')"><i class="fa fa-lg fa-fw fa-trash"></i></button></form>';
@@ -108,7 +108,7 @@ class SiteController extends Controller
     {
         CheckPermission::checkAuth('Listar Sites');
 
-        $site = Site::find($id);
+        $site = Site::with('links')->find($id);
 
         if (!$site) {
             abort(403, 'Acesso não autorizado');

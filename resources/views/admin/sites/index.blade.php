@@ -42,10 +42,11 @@
                         @php
                             $heads = [
                                 ['label' => 'ID', 'width' => 10],
-                                'Site',
+                                'URL',
                                 'Descrição',
                                 'Checagem',
                                 'Status',
+                                'Links',
                                 ['label' => 'Ações', 'no-export' => true, 'width' => 15],
                             ];
                             $config = [
@@ -56,6 +57,7 @@
                                     ['data' => 'description', 'name' => 'description'],
                                     ['data' => 'last_check', 'name' => 'last_check'],
                                     ['data' => 'status', 'name' => 'status'],
+                                    ['data' => 'links', 'name' => 'links'],
                                     [
                                         'data' => 'action',
                                         'name' => 'action',
