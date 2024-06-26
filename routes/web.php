@@ -45,7 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
          * ACL
          * */
         /** Permissions */
-        Route::resource('permission', PermissionController ::class);
+        Route::resource('permission', PermissionController::class);
 
         /** Roles */
         Route::get('role/{role}/permission', [RoleController::class, 'permissions'])->name('role.permissions');
