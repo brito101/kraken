@@ -22,6 +22,7 @@
 -   `sail artisan jwt:secret`
 -   `sail artisan storage:link`
 -   `sail artisan migrate --seed`
+-   `sail artisan queue:work`
 -   `sail npm install && sail npm run dev`
 -   `sail stop`
 

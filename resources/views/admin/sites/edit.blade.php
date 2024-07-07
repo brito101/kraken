@@ -14,10 +14,10 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Home</a></li>
-                        @can('Editar Sites')
+                        @can('Visualizar Sites')
                             <li class="breadcrumb-item"><a href="{{ route('admin.sites.index') }}">Sites</a></li>
                         @endcan
-                        <li class="breadcrumb-item active">Editar Site</li>
+                        <li class="breadcrumb-item active">Site</li>
                     </ol>
                 </div>
             </div>

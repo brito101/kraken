@@ -2,7 +2,6 @@
 
 namespace App\Http\Crawler;
 
-use App\Helpers\Command;
 use DOMDocument;
 use GuzzleHttp\Client;
 
@@ -28,11 +27,12 @@ class Crawler
                 ],
                 'allow_redirects' => true,
                 'timeout' => 5,
+                'verify' => false,
             ]
         );
 
         try {
-            $response = $httpClient->get($url, ['verify' => false]);
+            $response = $httpClient->get($url);
 
             $headers =  $response->getHeaders();
 
@@ -49,8 +49,26 @@ class Crawler
             }
 
             return ['links' => $list, 'headers' => $headers];
-        } catch (\Exception $e) {
-            return ['links' => [], 'headers' => []];
+        } catch (\GuzzleHttp\Exception\RequestException $e) {
+
+            if ($e->hasResponse()) {
+                $response = $e->getResponse();
+                $headers =  $response->getHeaders();
+
+                $htmlString = (string) $response->getBody();
+                $dom = new DOMDocument('1.0', 'UTF-8');
+                $dom->loadHTML('<?xml encoding="utf-8" ?>' . $htmlString, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD | LIBXML_NOERROR | LIBXML_NOWARNING);
+                $links = $dom->getElementsByTagName('a');
+                $title = $dom->getElementsByTagName('title');
+                $title = ($title[0]->nodeValue);
+                foreach ($links as $k => $v) {
+                    $list[$k]['page'] = $title;
+                    $list[$k]['url'] = $v->getAttribute('href');
+                    $list[$k]['title'] = $v->getAttribute('title');
+                }
+
+                return ['links' => $list, 'headers' => $headers];
+            }
         }
     }
 }
