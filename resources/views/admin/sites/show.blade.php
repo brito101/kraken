@@ -112,6 +112,9 @@
                                     'processing' => true,
                                     'serverSide' => true,
                                     'responsive' => true,
+                                    'pageLength' => 50,
+                                    'lengthMenu' => [[10, 50, 100, 500, 1000, -1], [10, 50, 100, 500, 1000, 'Tudo']],
+                                    'refresh' => 30000,
                                     'dom' => '<"d-flex flex-wrap col-12 justify-content-between"Bf>rtip',
                                     'buttons' => [
                                         ['extend' => 'pageLength', 'className' => 'btn-default'],

@@ -83,7 +83,7 @@ return [
     | Default: false
     |
     */
-    'obfuscate' => env('MINIFY_OBFUSCATE', true),
+    'obfuscate' => env('MINIFY_OBFUSCATE', false),
 
     /*
     |--------------------------------------------------------------------------
