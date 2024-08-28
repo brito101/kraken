@@ -24,6 +24,8 @@ class Link extends Model
         'status',
         'site_id',
         'last_check',
+        'signal',
+        'observations'
     ];
 
     public function getLastCheckAttribute($value)

@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('sites', SiteController::class);
 
         /** Links */
-        Route::get('/links/{site}', [LinksController::class, 'index'])->name('links.index');
+        Route::resource('/links/{site}/link', LinksController::class)->except(['create', 'store']);
 
         /** Users */
         Route::get('/user/edit', [UserController::class, 'edit'])->name('user.edit');

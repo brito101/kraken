@@ -24,21 +24,6 @@
     </div>
     <section class="content">
         <div class="container-fluid">
-            <div class="row">
-                @if (Auth::user()->hasRole('Programador|Administrador'))
-                    <div class="col-12 col-sm-6 col-md-4">
-                        <div class="info-box mb-3">
-                            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-user-shield"></i></span>
-                            <div class="info-box-content">
-                                <span class="info-box-text">Administradores</span>
-                                <span class="info-box-number">{{ $administrators }}</span>
-                            </div>
-                        </div>
-                    </div>
-                @endif
-
-            </div>
-
             @if (Auth::user()->hasRole('Programador|Administrador'))
                 <div class="card">
                     <div class="card-header">
@@ -129,7 +114,7 @@
 
                 <div class="row px-0">
 
-                    <div class="col-12 col-lg-6">
+                    <div class="col-12">
                         <div class="card">
                             <div class="card-header border-0">
                                 <div class="d-flex justify-content-between">

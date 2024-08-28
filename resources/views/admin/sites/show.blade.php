@@ -31,6 +31,8 @@
             <div class="row">
                 <div class="col-12">
 
+                    @include('components.alert')
+
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Dados Cadastrais do Site</h3>
@@ -71,7 +73,8 @@
                                             <label for="technologies">Tecnologias</label>
                                             <div class="col-12 form-group px-0 d-flex flex-wrap justify-content-center"
                                                 id="technologies">
-                                                <div class="col-12 px-0 border border-secondary border-2 mx-1 rounded p-2">
+                                                <div class="col-12 px-0 border border-secondary border-2 mx-1 rounded p-2"
+                                                    style="max-height: 300px; overflow-y: auto;">
                                                     {!! $site->technologies !!}
                                                 </div>
                                             </div>
@@ -97,15 +100,28 @@
                             @endif
 
                             @php
-                                $heads = [['label' => 'ID', 'width' => 10], 'Página', 'URL', 'Checagem', 'Status'];
+                                $heads = [
+                                    ['label' => 'ID', 'width' => 10],
+                                    'Página',
+                                    'URL',
+                                    'Checagem',
+                                    'Status',
+                                    ['label' => 'Ações', 'no-export' => true, 'width' => 15],
+                                ];
                                 $config = [
-                                    'ajax' => url('/admin/links/' . $site->id),
+                                    'ajax' => url('/admin/links/' . $site->id . '/link'),
                                     'columns' => [
                                         ['data' => 'id', 'name' => 'id'],
                                         ['data' => 'page', 'name' => 'page'],
                                         ['data' => 'url', 'name' => 'url'],
                                         ['data' => 'last_check', 'name' => 'last_check'],
                                         ['data' => 'status', 'name' => 'status'],
+                                        [
+                                            'data' => 'action',
+                                            'name' => 'action',
+                                            'orderable' => false,
+                                            'searchable' => false,
+                                        ],
                                     ],
                                     'language' => ['url' => asset('vendor/datatables/js/pt-BR.json')],
                                     'autoFill' => true,
@@ -156,14 +172,37 @@
                                     ],
                                 ];
                             @endphp
+
                             <div class="card">
-                                <div class="card-header">
-                                    <h3 class="card-title">Links</h3>
+
+                                <div class="card-header p-2">
+                                    <ul class="nav nav-pills">
+                                        <li class="nav-item"><a class="nav-link active" href="#links"
+                                                data-toggle="tab">Links</a>
+                                        </li>
+                                        <li class="nav-item"><a class="nav-link" href="#emails"
+                                                data-toggle="tab">E-mails</a>
+                                        </li>
+                                    </ul>
                                 </div>
+
                                 <div class="card-body">
-                                    <x-adminlte-datatable id="table1" :heads="$heads" :heads="$heads"
-                                        :config="$config" striped hoverable beautify />
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="links">
+                                            <div class="card-body">
+                                                <x-adminlte-datatable id="table1" :heads="$heads" :heads="$heads"
+                                                    :config="$config" striped hoverable beautify />
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="emails">
+                                            <div class="card-body">
+
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
+
                             </div>
 
                         </div>

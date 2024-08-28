@@ -16,8 +16,6 @@ class AdminController extends Controller
 {
     public function index(Request $request)
     {
-        $administrators = ViewsUser::where('type', 'Administrador')->count();
-
         $visits = Visit::where('url', '!=', route('admin.home.chart'))
             ->where('url', 'NOT LIKE', '%columns%')
             ->where('url', 'NOT LIKE', '%storage%')
@@ -25,6 +23,7 @@ class AdminController extends Controller
             ->where('url', 'NOT LIKE', '%offline%')
             ->where('url', 'NOT LIKE', '%manifest.json%')
             ->where('url', 'NOT LIKE', '%.png%')
+            ->where('url', 'NOT LIKE', '%serviceworker.js%')
             ->get();
 
         if ($request->ajax()) {
@@ -45,7 +44,6 @@ class AdminController extends Controller
         $chart = $statistics['chart'];
 
         return view('admin.home.index', compact(
-            'administrators',
             'onlineUsers',
             'percent',
             'access',
@@ -87,6 +85,7 @@ class AdminController extends Controller
             ->where('url', 'NOT LIKE', '%offline%')
             ->where('url', 'NOT LIKE', '%manifest.json%')
             ->where('url', 'NOT LIKE', '%.png%')
+            ->where('url', 'NOT LIKE', '%serviceworker.js%')
             ->where('method', 'GET')
             ->get();
         $accessYesterday = VisitYesterday::where('url', '!=', route('admin.home.chart'))
@@ -96,6 +95,7 @@ class AdminController extends Controller
             ->where('url', 'NOT LIKE', '%offline%')
             ->where('url', 'NOT LIKE', '%manifest.json%')
             ->where('url', 'NOT LIKE', '%.png%')
+            ->where('url', 'NOT LIKE', '%serviceworker.js%')
             ->where('method', 'GET')
             ->count();
 

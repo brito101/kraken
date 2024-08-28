@@ -1,7 +1,8 @@
 @extends('adminlte::page')
 
-@section('title', '- Edição de Site')
+@section('title', '- Edição de Link')
 @section('plugins.Summernote', true)
+@section('plugins.BootstrapSwitch', true)
 
 @section('content')
 
@@ -9,7 +10,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1><i class="fas fa-fw fa-globe"></i> Editar Site</h1>
+                    <h1><i class="fas fa-fw fa-link"></i> Editar Link</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -17,7 +18,7 @@
                         @can('Listar Sites')
                             <li class="breadcrumb-item"><a href="{{ route('admin.sites.index') }}">Sites</a></li>
                         @endcan
-                        <li class="breadcrumb-item active">Site</li>
+                        <li class="breadcrumb-item active">Link</li>
                     </ol>
                 </div>
             </div>
@@ -33,13 +34,14 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Dados Cadastrais do Site</h3>
+                            <h3 class="card-title">Dados Cadastrais do Link</h3>
                         </div>
 
-                        <form method="POST" action="{{ route('admin.sites.update', ['site' => $site->id]) }}">
+                        <form method="POST"
+                            action="{{ route('admin.link.update', ['site' => $link->site_id, 'link' => $link->id]) }}">
                             @csrf
                             @method('PUT')
-                            <input type="hidden" name="id" value="{{ $site->id }}">
+                            <input type="hidden" name="id" value="{{ $link->id }}">
                             <div class="card-body">
 
                                 <div class="d-flex flex-wrap justify-content-between">
@@ -47,16 +49,27 @@
                                         <label for="url">URL</label>
                                         <input type="text" class="form-control" id="url"
                                             placeholder="URL do site para busca" name="url"
-                                            value="{{ old('url') ?? $site->url }}" required>
+                                            value="{{ old('url') ?? $link->url }}" required>
                                     </div>
-                                </div>
 
-                                <div class="d-flex flex-wrap justify-content-between">
-                                    <div class="col-12 form-group px-0 mb-0">
-                                        <x-adminlte-textarea name="description" label="Descrição" rows=5 igroup-size="sm"
-                                            placeholder="Texto descritivo...">
-                                            {{ old('description') ?? $site->description }}
-                                        </x-adminlte-textarea>
+                                    <div class="col-12 form-group px-0">
+                                        <label for="page">Página</label>
+                                        <input type="text" class="form-control" id="page"
+                                            placeholder="Título da Página" name="page"
+                                            value="{{ old('page') ?? $link->page }}">
+                                    </div>
+
+                                    <div class="d-flex flex-wrap justify-content-start">
+                                        <label class="align-self-center mr-2">Sinalizar?</label>
+                                        @if ($link->signal == 1)
+                                            <x-adminlte-input-switch name="signal" data-on-color="success"
+                                                data-off-color="danger" data-on-text="Sim" data-off-text="Não"
+                                                enable-old-support checked />
+                                        @else
+                                            <x-adminlte-input-switch name="signal" data-on-color="success"
+                                                data-off-color="danger" data-on-text="Sim" data-off-text="Não"
+                                                enable-old-support />
+                                        @endif
                                     </div>
                                 </div>
 
@@ -80,16 +93,17 @@
                                     ];
                                 @endphp
 
-
                                 <div class="d-flex flex-wrap justify-content-between">
                                     <div class="col-12 form-group px-0 mb-0">
                                         <x-adminlte-text-editor name="observations" label="Observações" id="observations"
                                             label-class="text-black" igroup-size="md" placeholder="Texto descritivo..."
                                             :config="$config">
-                                            {!! old('observations') ?? $site->observations !!}
+                                            {!! old('observations') ?? $link->observations !!}
                                         </x-adminlte-text-editor>
                                     </div>
                                 </div>
+
+
                             </div>
 
                             <div class="card-footer">
